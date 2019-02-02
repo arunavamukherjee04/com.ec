@@ -1,0 +1,45 @@
+import  Mongoose  from "mongoose";
+
+const Schema = Mongoose.Schema;
+Mongoose.connect("mongodb://localhost/employeecentral", {
+    useNewUrlParser: true
+})
+
+//Creating the model 
+const employeeSchema = new Schema({
+    name: String,
+    bio: String,
+    organization: String,
+    gender: String,
+    date_of_birth: Date,
+    contact_detail: {
+        contact_no: String,
+        email: String
+    },
+    address: {
+        address_line1: String,
+        address_line2: String,
+        address_line3: String,
+        city: String,
+        pin: Number,
+        district: String,
+        state: String,
+        country: String, 
+        type_of_address: String
+    },
+    nationality: String,
+    skills: [{
+        skill_name: String,
+        level: String
+    }],
+    profile_pic: String,
+    cover_pic: String,
+});
+
+const Employee = Mongoose.model("Employee", employeeSchema);
+
+//CRUD Operations
+exports.createEmployee = (employeeData) => {
+    let employee = new Employee(employeeData)
+    return employee.save();
+};

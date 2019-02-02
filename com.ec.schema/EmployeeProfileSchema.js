@@ -1,9 +1,9 @@
-import { buildSchema } from "graphql";
+import {resolvers} from "../com.ec.API/Resolvers_Mutations";
+import { makeExecutableSchema } from "graphql-tools";
 
-const schema = buildSchema(`
+const typeDefs = ` 
     type Query {
         hello: String!
-
         employee(id: String!): Employee
     }
 
@@ -28,30 +28,9 @@ const schema = buildSchema(`
         ADVANCED
     }
 
-    type Position {
-        id: ID!
-        name: String!
-    }
-
     type Contact {
         contact_no: String!
         email: String!
-    }
-
-    type Country {
-        name: String!
-        country_code: String!
-    }
-
-    type City {
-        name: String!
-        city_code: String!
-    }
-
-    type Location {
-        country: Country!
-        city: City!
-        desk_location: String!
     }
 
     type Address {
@@ -71,32 +50,24 @@ const schema = buildSchema(`
         level: SkillLevel!
     }
 
-    type Organization {
-        name: String!
-        description: String!
-    }
-
     type Employee {
         id: ID!
         employee_id: String!
         name: String!
         bio: String
-        organization: Organization!
-        Manager: Employee
         gender: Gender
         date_of_birth: Date!
-        joining_date: Date!
         contact_detail: Contact!
         address: Address!
         nationality: String
-        position: Position!
-        location: Location
+        organization: String
+        position:String
         skills: [Skill!]
         profile_pic: String
         cover_pic: String
     }
 
-    
+
     input ContactInput {
         contact_no: String!
         email: String!
@@ -114,11 +85,6 @@ const schema = buildSchema(`
         type_of_address: AddressType! 
     }
 
-    input LocationInput {
-        country: String!
-        city: String!
-        desk_location: String!
-    }
 
     input SkillInput {
         skill_name: String!
@@ -129,19 +95,19 @@ const schema = buildSchema(`
         name: String!
         bio: String
         organization: String!
-        Manager: String
         gender: Gender
-        date_of_birth: Date!
-        joining_date: Date!
+        date_of_birth: String!
         contact_detail: ContactInput!
         address: AddressInput!
         nationality: String
-        position: String!
-        location: LocationInput
+        position: String
         skills: [SkillInput!]
         profile_pic: String
         cover_pic: String
     }
-`);
+`;
 
-export default schema;
+export const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers
+});
