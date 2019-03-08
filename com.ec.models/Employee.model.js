@@ -39,7 +39,11 @@ const employeeSchema = new Schema({
 const Employee = Mongoose.model("Employee", employeeSchema);
 
 //CRUD Operations
-exports.createEmployee = (employeeData) => {
+const createEmployee = (employeeData) => {
     let employee = new Employee(employeeData)
     return employee.save();
 };
+
+module.exports = {
+    createEmployee: createEmployee
+}
