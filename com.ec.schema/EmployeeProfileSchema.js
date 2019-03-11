@@ -1,4 +1,4 @@
-import {resolvers} from "../com.ec.API/Resolvers_Mutations";
+import { resolvers } from "../com.ec.API/Resolvers_Mutations";
 import { makeExecutableSchema } from "graphql-tools";
 
 const typeDefs = ` 
@@ -29,8 +29,8 @@ const typeDefs = `
     }
 
     type Contact {
-        contact_no: String!
-        email: String!
+        contact_type: String!
+        contact_through: String!
     }
 
     type Address {
@@ -50,6 +50,19 @@ const typeDefs = `
         level: SkillLevel!
     }
 
+    type Experence {
+        organization: Organization!
+        position: String!
+        start: Date!
+        end: Date!
+    }
+
+    type Organization {
+        id: String!
+        name: String!
+        org_logo: String
+    }
+
     type Employee {
         id: ID!
         employee_id: String!
@@ -57,20 +70,21 @@ const typeDefs = `
         bio: String
         gender: Gender
         date_of_birth: Date!
-        contact_detail: Contact!
+        contact_detail: [Contact!]
         address: Address!
         nationality: String
-        organization: String
+        organization: Organization!
         position:String
         skills: [Skill!]
         profile_pic: String
         cover_pic: String
+        experiences: [Experence!]
     }
 
 
     input ContactInput {
-        contact_no: String!
-        email: String!
+        contact_type: String!
+        contact_through: String!
     }
 
     input AddressInput {
@@ -91,19 +105,33 @@ const typeDefs = `
         level: SkillLevel!
     }
 
+    input OrganizationInput {
+        id: String!
+        name: String!
+        org_logo: String
+    }
+
+    input ExperenceInput {
+        organization: OrganizationInput!
+        position: String!
+        start: Date!
+        end: Date!
+    }
+
     input EmployeeInput {
         name: String!
         bio: String
-        organization: String!
+        organization: OrganizationInput!
         gender: Gender
         date_of_birth: String!
-        contact_detail: ContactInput!
+        contact_detail: [ContactInput!]
         address: AddressInput!
         nationality: String
         position: String
         skills: [SkillInput!]
         profile_pic: String
         cover_pic: String
+        experiences: [ExperenceInput!]
     }
 `;
 

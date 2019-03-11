@@ -5,7 +5,7 @@ import {schema}  from "./com.ec.schema/EmployeeProfileSchema";
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send("Hello")
+    res.send("Welcome To GraphQL")
 });
 
 app.use("/api/v1/com/ec", graphqlHTTP({

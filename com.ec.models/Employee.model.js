@@ -9,13 +9,17 @@ Mongoose.connect("mongodb://localhost/employeecentral", {
 const employeeSchema = new Schema({
     name: String,
     bio: String,
-    organization: String,
+    organization: {
+        id: String,
+        name: String,
+        org_logo: String
+    },
     gender: String,
     date_of_birth: Date,
-    contact_detail: {
-        contact_no: String,
-        email: String
-    },
+    contact_detail: [{
+        contact_type: String,
+        contact_through: String
+    }],
     address: {
         address_line1: String,
         address_line2: String,
@@ -34,6 +38,16 @@ const employeeSchema = new Schema({
     }],
     profile_pic: String,
     cover_pic: String,
+    experiences: [{
+        organization: {
+            id: String,
+            name: String,
+            org_logo: String
+        }, 
+        position: String,
+        start: Date,
+        end: Date
+    }]
 });
 
 const Employee = Mongoose.model("Employee", employeeSchema);
