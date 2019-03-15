@@ -4,6 +4,12 @@ export const resolvers = {
     Query: {
         hello: () => {
             return "Hello There !!!"
+        },
+
+        employee: (obj, args, context, info) => {
+            return EmployeeModel.getEmployee(args.id).then((result) => {
+                return result;
+            });
         }
     },
 

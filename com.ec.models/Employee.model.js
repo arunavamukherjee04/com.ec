@@ -58,6 +58,16 @@ const createEmployee = (employeeData) => {
     return employee.save();
 };
 
+const getEmployee = (employeeID) => {
+    return new Promise((resolve, reject) => {
+        Employee.findById(employeeID, (error, user) => {
+            if(error) reject (err)
+            resolve(user)
+        })
+    });
+}
+
 module.exports = {
-    createEmployee: createEmployee
+    createEmployee: createEmployee,
+    getEmployee: getEmployee
 }

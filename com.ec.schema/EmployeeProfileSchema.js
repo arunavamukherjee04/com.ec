@@ -64,8 +64,7 @@ const typeDefs = `
     }
 
     type Employee {
-        id: ID!
-        employee_id: String!
+        id: ID
         name: String!
         bio: String
         gender: Gender
