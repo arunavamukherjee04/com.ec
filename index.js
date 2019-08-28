@@ -1,9 +1,11 @@
 import express from "express";
 import graphqlHTTP from "express-graphql";
-import {schema}  from "./com.ec.schema/EmployeeProfileSchema";
+import cors from "cors";
+import { schema } from "./com.ec.schema/EmployeeProfileSchema";
 
 const app = express();
 
+app.use(cors());
 app.get("/", (req, res) => {
     res.send("Welcome To GraphQL")
 });
